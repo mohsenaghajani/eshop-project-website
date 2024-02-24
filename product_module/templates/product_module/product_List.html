@@ -8,9 +8,18 @@
     <ul>
         {% for product in products %}
             <li>
-                <a href="{% url 'products-detail' product_id=product.id slug=product.slug %}">{{ product.title }}</a>
+                <a href="{% url 'products-detail' product_id=product.id slug=product.slug %}">{{ product.title }}
+                    price : {{ product.price_with_discount }}  rate : {{ product.rate }}</a>
             </li>
         {% endfor %}
     </ul>
+    <hr>
+    <p>
+    products count : {{ product_count }}
+    </p>
+    <br>
+    <h3>
+    rating average : {{ rating_avg.rate__avg }}
+    </h3>
 
 {% endblock %}
