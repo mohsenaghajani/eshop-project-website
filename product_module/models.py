@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
 from django.utils.text import slugify
 # Create your models here.
 
@@ -40,6 +41,9 @@ class Product(models.Model):
     slug = models.SlugField(default='', null=False, unique=True)
     created_time = models.DateTimeField(auto_now=True)
     modified_time = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('products-detail', args=[self.id])
 
     def save(self, *args, **kwargs):
         self.final_price = self.price - (self.price * (self.discount / 100))
