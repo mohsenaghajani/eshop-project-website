@@ -25,7 +25,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['is_active', 'price', 'discount']
     list_filter = ['price', 'is_active']
     inlines = [ProductTagAdmin]
-    readonly_fields = ['slug', 'is_delete']
+    readonly_fields = ['slug', 'is_delete', 'final_price']
 
 
 

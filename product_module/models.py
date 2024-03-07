@@ -11,6 +11,7 @@ class Category(models.Model):
     created_time = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=False, verbose_name='فعال /غیر فعال')
     is_delete = models.BooleanField(verbose_name='حذف شده / نشده')
+
     def __str__(self):
         return f'{self.name}'
 
@@ -37,10 +38,11 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name='توضیحات')
     short_description = models.TextField(max_length=300, verbose_name='توضیحات خلاصه')
     is_active = models.BooleanField(default=False, verbose_name='فعال /غیر فعال')
-    is_delete = models.BooleanField(verbose_name='حذف شده / نشده')
+    is_delete = models.BooleanField(default=False, verbose_name='حذف شده / نشده')
     slug = models.SlugField(default='', null=False, unique=True)
     created_time = models.DateTimeField(auto_now=True)
     modified_time = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='images/product', null=True, blank=True, verbose_name='تصویر محصول')
 
     def get_absolute_url(self):
         return reverse('products-detail', args=[self.id])
