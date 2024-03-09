@@ -8,6 +8,7 @@ class HomePage(TemplateView):
 
 
 def index_header_component(request):
+
     return render(request, 'shared/site_header.html', )
 
 
