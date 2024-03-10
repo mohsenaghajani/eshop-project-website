@@ -35,7 +35,7 @@
 
 					<div class="col-sm-4" style="text-align: left;">
 						<div class="logo">
-							<a href="{% url 'home-page' %}"><img src="/static/images/home/logo.png" alt="Logo" style="text-align: center;" /></a>
+							<a href="{% url 'home-page' %}"><img src="{{ site_setting.site_logo.url }}" alt="Logo" style="text-align: center;" /></a>
 						</div>
 					</div>
 
@@ -99,8 +99,8 @@
 										<li><a href="blog-single.html">صفحـه خبـر</a></li>
                                     </ul>
                                 </li>
-								<li><a href="About.html">درباره مـا</a></li>
-								<li><a href="contact-us.html">تماس با مـا</a></li>
+								<li><a href="">درباره مـا</a></li>
+								<li><a href="{% url 'contact-us' %}">تماس با مـا</a></li>
 							</ul>
 						</div>
 					</div>

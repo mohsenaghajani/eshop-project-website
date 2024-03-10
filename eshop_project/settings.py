@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from eshop_project.local_settings import DEBUG, SECRET_KEY, EMAIL_HOST, EMAIL_HOST_USER
+from eshop_project.local_settings import DEBUG, SECRET_KEY, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'product_module',
     'home',
     'django_render_partial' ,
-    'account'
+    'account',
+    'site_sittings'
 ]
 
 MIDDLEWARE = [
@@ -135,5 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_PASSWORD = 'mohsen1378'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
