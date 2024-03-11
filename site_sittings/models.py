@@ -47,4 +47,20 @@ class FooterLink(models.Model):
         return self.title
 
 
+class Slider(models.Model):
+    title = models.CharField(max_length=300, verbose_name='عنوان')
+    url_title = models.CharField(max_length=330, verbose_name='عنوان لینک')
+    url = models.URLField(max_length=300, verbose_name='لینک ')
+    description = models.TextField(verbose_name='توضیحات')
+    image = models.ImageField(upload_to='images/slider', verbose_name='عکس ')
+    is_active = models.BooleanField(default=True, verbose_name='فعال | غیر فعال ')
+
+    class Meta:
+        verbose_name = 'تنظیمات اسلاید'
+        verbose_name_plural = 'تنظیمات اسلایدر'
+
+    def __str__(self):
+        return self.title
+
+
 

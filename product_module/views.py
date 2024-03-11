@@ -23,3 +23,5 @@ class ProductDetail(DetailView):
     template_name = 'product_module/product_detail.html'
     model = Product
 
+
+

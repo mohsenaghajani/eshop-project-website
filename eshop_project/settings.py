@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'home',
     'django_render_partial' ,
     'account',
-    'site_sittings'
+    'site_sittings',
+    'article'
 ]
 
 MIDDLEWARE = [

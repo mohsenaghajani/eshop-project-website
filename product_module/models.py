@@ -45,7 +45,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/product', null=True, blank=True, verbose_name='تصویر محصول')
 
     def get_absolute_url(self):
-        return reverse('products-detail', args=[self.id])
+        return reverse('products-detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         self.final_price = self.price - (self.price * (self.discount / 100))

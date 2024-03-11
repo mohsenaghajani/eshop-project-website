@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from site_sittings.models import SiteSettings, FooterLink, FooterLinkBox
+from site_sittings.models import SiteSettings, FooterLink, FooterLinkBox, Slider
 
 
 # Create your views here.
@@ -9,6 +9,12 @@ from site_sittings.models import SiteSettings, FooterLink, FooterLinkBox
 
 class HomePage(TemplateView):
     template_name = 'home/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slider = Slider.objects.filter(is_active=True)
+        context['sliders'] = slider
+        return context
 
 
 def index_header_component(request):
