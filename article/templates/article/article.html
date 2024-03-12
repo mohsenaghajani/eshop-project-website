@@ -1,5 +1,5 @@
 {% extends 'shared/_layout.html' %}
-
+{% load thumbnail %}
 {% block title %}
 	article
 {% endblock %}
@@ -30,7 +30,10 @@
 								</span>
 							</div>
 							<a href="">
-								<img src="{{ article.image.url }}" alt="">
+                                {% thumbnail article.image "500x500" crop='center' quality=20 as im %}
+                                    <img src="{{ im.url }}">
+                                {% endthumbnail %}
+{#								<img src="{{ article.image.url }}" alt="">#}
 							</a>
 							<p>{{ article.short_description }}</p>
 							<a  class="btn btn-primary" href="">ادامـه مطلب</a>
