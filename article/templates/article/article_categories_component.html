@@ -8,7 +8,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     {% if main_category.category.all %}
-                        <a data-toggle="collapse" data-parent="#accordian" href="#{{ main_category.url_title }}">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                             {{ main_category.title }}
                         </a>
@@ -21,11 +21,11 @@
                 </h4>
             </div>
             {% if main_category.category.all %}
-                <div id="{{ main_category.url_title }}" class="panel-collapse collapse">
+                <div id="sportswear" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul>
                             {% for sub_category in main_category.category.all %}
-                                <li><a href="{% url 'article-category' category=sub_category.url_title %}"> {{ sub_category.title }}ll </a></li>
+                                <li><a href="{% url 'article-category' category=sub_category.url_title %}"> {{ sub_category.title }}</a></li>
                             {% endfor %}
 
                         </ul>
