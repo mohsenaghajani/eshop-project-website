@@ -1,4 +1,4 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView
@@ -47,7 +47,19 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data()
         article: Article = kwargs.get('object')
-        context['comments'] = ArticleComment.objects.filter(article_id=article.id, parent=None).prefetch_related('articlecomment_set')
+        context['comments'] = (ArticleComment.objects.filter
+                               (article_id=article.id, parent=None).prefetch_related('articlecomment_set')).order_by('-created_time')
 
         return context
 
+
+def get_article_comment(request):
+    if request.user.is_authenticated:
+        text_comment = request.GET.get('comment')
+        article_id = request.GET.get('article_id')
+        parent_id = request.GET.get('parent_id')
+        ArticleComment.objects.create(user_id=request.user.id,
+                                      text=text_comment,
+                                      article_id=article_id,
+                                      parent_id=parent_id)
+        return HttpResponse('hellllo')
