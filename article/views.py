@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
-from article.models import Article, Category
+from article.models import Article, Category, ArticleComment
 
 
 # Create your views here.
@@ -43,4 +43,11 @@ class ArticleDetailView(DetailView):
         query = super(ArticleDetailView, self).get_queryset()
         query = query.filter(is_active=True)
         return query
+
+    def get_context_data(self, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data()
+        article: Article = kwargs.get('object')
+        context['comments'] = ArticleComment.objects.filter(article_id=article.id, parent=None).prefetch_related('articlecomment_set')
+
+        return context
 
