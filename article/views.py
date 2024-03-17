@@ -49,7 +49,7 @@ class ArticleDetailView(DetailView):
         article: Article = kwargs.get('object')
         context['comments'] = (ArticleComment.objects.filter
                                (article_id=article.id, parent=None).prefetch_related('articlecomment_set')).order_by('-created_time')
-
+        context['comments_count'] = ArticleComment.objects.filter(article_id=article.id).count()
         return context
 
 
@@ -62,4 +62,12 @@ def get_article_comment(request):
                                       text=text_comment,
                                       article_id=article_id,
                                       parent_id=parent_id)
-        return HttpResponse('hellllo')
+        context = {
+            'comments': (ArticleComment.objects.filter
+                               (article_id=article_id, parent=None).prefetch_related('articlecomment_set')).order_by('-created_time'),
+            'comments_count': ArticleComment.objects.filter(article_id=article_id).count()
+        }
+        return render(request, 'include/article_comment_partial.html', context )
+
+
+    return HttpResponse('hellllo')

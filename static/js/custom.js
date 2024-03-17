@@ -9,8 +9,19 @@ function sendArticleComment(articleId){
 
     }).then(res =>{
         console.log(res);
-        location.reload()
-    })
+        $('#comments-area').html(res);
+        $('#parent_id').val('');
+        $('#commentText').val('');
+        if(parent !== null && parent !== '') {
+            document.getElementById('comment-box-' + parent).scrollIntoView({behavior: 'smooth'})
+        }else{
+            document.getElementById('comments-area').scrollIntoView({behavior: 'smooth'})
+            }
+
+
+
+
+    });
 
 }
 
