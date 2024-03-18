@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'jalali_date',
     'polls',
+    'user_panel'
 ]
 
 MIDDLEWARE = [

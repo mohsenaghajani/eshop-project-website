@@ -11,6 +11,7 @@ class User(AbstractUser):
     email_active_code = models.CharField(max_length=100, verbose_name='کد فعال سازی ایمیل', null=True)
     about_user = models.TextField(null=True, blank=True, verbose_name='درباره شخص')
     avatar_image = models.ImageField(upload_to='images/profile', verbose_name='عکس پروفایل' , null=True)
+    address = models.TextField(null=True, verbose_name='ادرس')
 
     class Mete:
         verbose_name = 'کاربر'

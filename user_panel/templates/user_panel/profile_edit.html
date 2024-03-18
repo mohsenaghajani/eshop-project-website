@@ -1,0 +1,22 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+{% block title %}
+	profile| پنل کاربری
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+                {% render_partial 'user_panel.views.user_profile_component' %}
+            <div class="col-md-8">
+                <form action="{% url 'profile-edit-page' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                </form>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

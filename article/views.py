@@ -54,6 +54,7 @@ class ArticleDetailView(DetailView):
 
 
 def get_article_comment(request):
+
     if request.user.is_authenticated:
         text_comment = request.GET.get('comment')
         article_id = request.GET.get('article_id')
