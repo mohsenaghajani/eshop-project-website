@@ -29,3 +29,17 @@ function fillParentId(parentId){
     $('#parent_id').val(parentId)
     document.getElementById('comment-form').scrollIntoView({behavior: 'smooth'})
 }
+
+function filterProduct(){
+    const filterPrice = $('#sl2').val();
+    const startPrice = filterPrice.split(',')[0];
+    const endPrice = filterPrice.split(',')[1];
+    $('#start-price').val(startPrice);
+    $('#end-price').val(endPrice);
+    $('#filter-form').submit();
+}
+
+function fillPage(page){
+    $('#page').val(page);
+    $('#filter-form').submit()
+}
