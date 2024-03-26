@@ -63,4 +63,21 @@ class Slider(models.Model):
         return self.title
 
 
+class Banner(models.Model):
+    class BannerPositions(models.TextChoices):
+        product_list = ('product_list', 'صفحه لیست محصولات')
+        product_detail = ('product_detail', 'صفحه جزئیات محصول')
+        about_us = ('about_us', 'صفحه درباره ما')
 
+    title = models.CharField(max_length=320, verbose_name='عنوان')
+    url = models.URLField(max_length=320, verbose_name='لینک')
+    image = models.ImageField(upload_to='images/banner', verbose_name='تصویر')
+    position = models.CharField(max_length=320, choices=BannerPositions.choices, verbose_name='محل قرارگیری')
+    is_active = models.BooleanField(verbose_name='فعال / غیر فعال')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'تبلیغات'
+        verbose_name_plural = 'بنر های تبلیغاتی'

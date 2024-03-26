@@ -2,6 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
 from article.models import Category
+from site_sittings.models import Banner
 from .models import Product, Brand
 from django.views.generic import ListView, DetailView
 from django.db.models import Avg, Count
@@ -25,6 +26,7 @@ class ProductList(ListView):
         context['db_max_price'] = db_max_price
         context['start_price'] = self.request.GET.get('start_price') or 0
         context['end_price'] = self.request.GET.get('end_price') or 100000
+        context['banners'] = Banner.objects.filter(is_active=True, position=Banner.BannerPositions.product_list)
         return context
 
     def get_queryset(self):
