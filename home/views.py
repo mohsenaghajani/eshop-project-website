@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
+from product_module.models import Product
+from utils.conveter import create_group_list
 from site_sittings.models import SiteSettings, FooterLink, FooterLinkBox, Slider
 
 
@@ -14,6 +16,8 @@ class HomePage(TemplateView):
         context = super().get_context_data(**kwargs)
         slider = Slider.objects.filter(is_active=True)
         context['sliders'] = slider
+        products = Product.objects.filter(is_active=True).order_by('-id')[:12]
+        context['group_list'] = create_group_list(products)
         return context
 
 
