@@ -2,6 +2,10 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.utils.text import slugify
+
+from account.models import User
+
+
 # Create your models here.
 
 
@@ -62,3 +66,16 @@ class ProductTag(models.Model):
 
     def __str__(self):
         return f'{self.caption}'
+
+
+class ProductVisit(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    user_ip = models.CharField(max_length=50, verbose_name='ای پی کاربر')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+
+    class Meta:
+        verbose_name = 'بازدید محصول'
+        verbose_name_plural = 'بازدید های محصولات'
+
+    def __str__(self):
+        return f'{self.product.title}'

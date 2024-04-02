@@ -1,12 +1,11 @@
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
-
 from article.models import Category
 from site_sittings.models import Banner
-from .models import Product, Brand
+from .models import Product, Brand, ProductVisit
 from django.views.generic import ListView, DetailView
 from django.db.models import Avg, Count
-
+from utils.user_ip import get_user_ip
 
 # Create your views here.
 
@@ -25,7 +24,7 @@ class ProductList(ListView):
         db_max_price = product.price or 100000
         context['db_max_price'] = db_max_price
         context['start_price'] = self.request.GET.get('start_price') or 0
-        context['end_price'] = self.request.GET.get('end_price') or 100000
+        context['end_price'] = self.request.GET.get('end_price') or 15000000
         context['banners'] = Banner.objects.filter(is_active=True, position=Banner.BannerPositions.product_list)
         return context
 
@@ -50,6 +49,18 @@ class ProductList(ListView):
 class ProductDetail(DetailView):
     template_name = 'product_module/product_detail.html'
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        loaded_product = self.object
+        user_ip = get_user_ip(self.request)
+        user = None
+        if self.request.user.is_authenticated:
+            user = self.request.user
+        has_been_visited = ProductVisit.objects.filter(user_ip__iexact=user_ip, product=loaded_product).exists()
+        if not has_been_visited:
+            ProductVisit.objects.create(user_ip=user_ip, user=user, product=loaded_product)
+        return context
 
 
 def category_component(request):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from product_module.models import Category, Brand, Product, ProductTag
+from product_module.models import Category, Brand, Product, ProductTag, ProductVisit
 
 
 # Register your models here.
@@ -28,5 +28,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ['slug', 'is_delete', 'final_price']
 
 
-
+@admin.register(ProductVisit)
+class ProductVisitAdmin(admin.ModelAdmin):
+    list_display = ['product', 'user']
 
