@@ -2,7 +2,7 @@ from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from product_module.models import Product
+from product_module.models import Product, Category
 from utils.conveter import create_group_list
 from site_sittings.models import SiteSettings, FooterLink, FooterLinkBox, Slider
 
@@ -22,6 +22,18 @@ class HomePage(TemplateView):
         most_visited = (Product.objects.filter(is_active=True).annotate(visit_count=Count('productvisit'))
                         .order_by('-visit_count'))[:12]
         context['most_visited'] = create_group_list(most_visited)
+        categories_products = []
+        categories = list(Category.objects.annotate(product_count=Count('product')).
+                          filter(is_active=True, product_count__gt=0))
+        for category in categories:
+            item = {
+                'title': category.name,
+                'id': category.id,
+                'products': category.product.all()
+            }
+            categories_products.append(item)
+
+        context['category_products'] = categories_products
         return context
 
 

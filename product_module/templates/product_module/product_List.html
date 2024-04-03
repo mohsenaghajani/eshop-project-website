@@ -11,7 +11,7 @@
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">محصولات عمده</h2>
                             {% for product in products %}
-                                {% include 'include/product_item.html' with product=product %}
+                                {% include 'include/product_item.html' with product=product col=4 %}
                             {% endfor %}
                             <div class="clearfix"></div>
 						<ul class="pagination">

@@ -1,16 +1,17 @@
 {% load thumbnail %}
-<div class="col-sm-4">
+{% load poll_extras %}
+<div class="col-sm-{{ col }}">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-                                       {% thumbnail product.image "128x90" quality=95 crop='center' as im %}
+                                       {% thumbnail product.image "128x90" quality=100 crop='center' as im %}
                                         <img src="{{ im.url }}">
                                     {% endthumbnail %}
 {#										<img src="{{ product.image.url }}" alt="" />#}
                                         {% if product.discount != 0  %}
                                         	<s>{{ product.price}} ريال</s>
                                             <h3>%{{ product.discount }}تخفیف</h3>
-                                            <h2>{{ product.final_price}} ريال</h2>
+                                            <h2>{{ product.final_price | three_digit_currency}} ريال</h2>
                                         {% else %}
                                             <h2>{{ product.price}} ريال</h2>
                                         {% endif %}
