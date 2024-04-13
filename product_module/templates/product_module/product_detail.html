@@ -20,20 +20,19 @@
 								
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img src="{{ product.image.url }}" alt=""></a>
+                                        {% for group in images_group %}
+                                        		<div class="item {% if forloop.first %} active {% endif %}">
+                                                {% for image in group %}
+                                                	  <a href=""><img src="{{ image.image.url }}" width="70" height="70" alt=""></a>
+                                                {% endfor %}
+
+
 
 										</div>
-										<div class="item">
-										  <a href=""><img src="/static/images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="/static/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="/static/images/product-details/similar3.jpg" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="/static/images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="/static/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="/static/images/product-details/similar3.jpg" alt=""></a>
-										</div>
+
+                                        {% endfor %}
+
+
 										
 									</div>
 

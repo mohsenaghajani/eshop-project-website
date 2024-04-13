@@ -2,11 +2,11 @@ from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 from article.models import Category
 from site_sittings.models import Banner
-from .models import Product, Brand, ProductVisit
+from .models import Product, Brand, ProductVisit, ProductImage
 from django.views.generic import ListView, DetailView
 from django.db.models import Avg, Count
 from utils.user_ip import get_user_ip
-
+from utils.conveter import create_group_list
 # Create your views here.
 
 
@@ -54,6 +54,7 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         loaded_product = self.object
         user_ip = get_user_ip(self.request)
+        context['images_group'] = create_group_list(list(ProductImage.objects.filter(product_id=loaded_product.id)), 3)
         user = None
         if self.request.user.is_authenticated:
             user = self.request.user
