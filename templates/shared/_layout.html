@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <title>{% block title %}{% endblock %}</title>
     {% include 'shared/header_reference.html' %}
+{% block header_reference %}{% endblock %}
 
 </head><!--/head-->
 
@@ -19,7 +20,9 @@
 {% render_partial 'home.views.index_footer_component' %}
 	
  {% include 'shared/footer_reference.html' %}
-  
+  {% block footer_reference %}
+
+  {% endblock %}
 
 </body>
 </html>

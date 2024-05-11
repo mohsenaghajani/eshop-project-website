@@ -3,7 +3,12 @@
 {% block title %}
 	{{ product.title }}
 {% endblock %}
-
+{% block header_reference %}
+    <link rel="stylesheet" href="/static/lib/lightbox/css/lightbox.css">
+{% endblock %}
+{% block footer_reference %}
+       <script src="/static/lib/lightbox/js/lightbox.js"></script>
+{% endblock %}
 {% block content %}
 <section>
 		<div class="container">
@@ -13,8 +18,8 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{{product.image.url}}" alt="">
-								<h3>بزرگنمایـی</h3>
+								<img src="{{product.image.url}}" alt="" id="mainImage">
+								<h3><a id="light-box-image" href="{{ product.image.url }}" data-lightbox="image-1">بزرگنمایـی </a></h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
@@ -23,7 +28,8 @@
                                         {% for group in images_group %}
                                         		<div class="item {% if forloop.first %} active {% endif %}">
                                                 {% for image in group %}
-                                                	  <a href=""><img src="{{ image.image.url }}" width="70" height="70" alt=""></a>
+                                                	  <a onclick="showLargeImage('{{ image.image.url }}')">
+                                                          <img src="{{ image.image.url }}" width="70" height="70" alt=""></a>
                                                 {% endfor %}
 
 

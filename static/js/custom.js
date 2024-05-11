@@ -43,3 +43,8 @@ function fillPage(page){
     $('#page').val(page);
     $('#filter-form').submit()
 }
+
+function showLargeImage(imageSrc){
+    $('#light-box-image').attr('href', imageSrc)
+    $('#mainImage').attr('src', imageSrc)
+}

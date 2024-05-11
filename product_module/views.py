@@ -55,12 +55,12 @@ class ProductDetail(DetailView):
         loaded_product = self.object
         user_ip = get_user_ip(self.request)
         context['images_group'] = create_group_list(list(ProductImage.objects.filter(product_id=loaded_product.id)), 3)
-        user = None
+        user_id = None
         if self.request.user.is_authenticated:
-            user = self.request.user
+            user_id = self.request.user.id
         has_been_visited = ProductVisit.objects.filter(user_ip__iexact=user_ip, product=loaded_product).exists()
         if not has_been_visited:
-            ProductVisit.objects.create(user_ip=user_ip, user=user, product=loaded_product)
+            ProductVisit.objects.create(user_ip=user_ip, user_id=user_id, product=loaded_product)
         return context
 
 
