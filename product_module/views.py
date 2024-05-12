@@ -55,6 +55,8 @@ class ProductDetail(DetailView):
         loaded_product = self.object
         user_ip = get_user_ip(self.request)
         context['images_group'] = create_group_list(list(ProductImage.objects.filter(product_id=loaded_product.id)), 3)
+        context['related_product'] = create_group_list(list(Product.objects.filter(brand_id=loaded_product.brand_id).
+                                                            exclude(pk=loaded_product.id).all()))
         user_id = None
         if self.request.user.is_authenticated:
             user_id = self.request.user.id
