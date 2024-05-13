@@ -48,3 +48,23 @@ function showLargeImage(imageSrc){
     $('#light-box-image').attr('href', imageSrc)
     $('#mainImage').attr('src', imageSrc)
 }
+
+
+function addToOrder(productId){
+    const productCount = $('#product_count').val()
+    $.get('/order/add_to_basket?product_id=' + productId + '&count=' + productCount).then(res =>
+    Swal.fire({
+  title: "نتیجه",
+  text: res.text,
+  icon: res.icon,
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: res.confirm_button_text
+}).then((result) => {
+    if (res.status === 'not_auth'){
+  if (result.isConfirmed) {
+    window.location.href = '/login';
+  }}
+}))
+}

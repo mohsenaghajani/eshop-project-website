@@ -17,7 +17,7 @@ class Order(models.Model):
         verbose_name_plural = 'سبد های خرید'
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
 class OrderDetail(models.Model):
@@ -31,4 +31,4 @@ class OrderDetail(models.Model):
         verbose_name_plural = 'لیست حزییات سبد خرید'
 
     def __str__(self):
-        return self.order
+        return f'{self.order}'
