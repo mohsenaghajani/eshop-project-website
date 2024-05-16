@@ -50,10 +50,11 @@
                                 	<li><a href="{% url 'profile-page' %}"><i class="fa fa-user"></i> {{ request.user.username }}</a></li>
 								    <li><a href="#"><i class="fa fa-star"></i> لیست علاقه مندی ها</a></li>
                                     <li><a href="{% url 'logout-page' %}"><i class="fa fa-sign-out"></i>خروج</a></li>
+                                     <li><a href="{% url 'basket' %}"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
                                 {% else %}
 								    <li><a href="{% url 'sign-in-page' %}"><i class="fa fa-sign-in"></i> ثبت نام</a></li>
                                     <li><a href="{% url 'login-page' %}"><i class="fa fa-sign-in"></i> ورود</a></li>
-								    <li><a href="l"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
+
                                 {% endif %}
 							</ul>
 						</div>

@@ -68,3 +68,20 @@ function addToOrder(productId){
   }}
 }))
 }
+
+function removeDetail(detailId){
+    $.get('/order/remove_basket_detail?detail_id=' + detailId).then(res =>{
+        if(res.status === 'success'){
+            $('#order_detail_content').html(res.data)
+        }
+    })
+}
+
+function changeOrderDetailCount(detailId, state){
+
+        $.get('/order/change_basket_detail?detail_id=' + detailId + '&state=' +state).then(res =>{
+        if(res.status === 'success'){
+            $('#order_detail_content').html(res.data)
+        }
+    })
+}

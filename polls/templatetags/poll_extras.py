@@ -10,4 +10,4 @@ def show_jalali_data(value):
 
 @register.filter(name='three_digit_currency')
 def three_digit_currency(value: int):
-    return '{:,}'.format(value)
+    return '{:,}'.format(value) + 'تومان'

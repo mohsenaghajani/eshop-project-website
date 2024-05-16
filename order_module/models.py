@@ -16,6 +16,17 @@ class Order(models.Model):
         verbose_name = 'سبد خرید'
         verbose_name_plural = 'سبد های خرید'
 
+
+    def total_price_amount(self):
+        total_amount = 0
+        if self.is_paid:
+            for order_detail in self.orderdetail_set.all():
+                total_amount += order_detail.final_price * order_detail.count
+            return total_amount
+        else:
+            for order_detail in self.orderdetail_set.all():
+                total_amount += order_detail.product.price * order_detail.count
+            return total_amount
     def __str__(self):
         return str(self.user)
 
@@ -32,3 +43,6 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return f'{self.order}'
+
+    def get_sum_price(self):
+        return self.count * self.product.price
