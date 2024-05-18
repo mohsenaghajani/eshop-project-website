@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -45,6 +46,7 @@ def add_product_to_basket(request: HttpRequest):
                              'confirm_button_text': 'وارد شدن' })
 
 
+@login_required()
 def basket(request: HttpRequest):
     current_order, created = Order.objects.get_or_create(user_id=request.user.id, is_paid=False)
     total_amount = current_order.total_price_amount()
@@ -55,6 +57,7 @@ def basket(request: HttpRequest):
     return render(request, 'basket/basket.html', context)
 
 
+@login_required()
 def basket_content(request: HttpRequest):
 
     detail_id = request.GET.get('detail_id')
@@ -82,6 +85,7 @@ def basket_content(request: HttpRequest):
     })
 
 
+@login_required()
 def change_order_detail_count(request: HttpRequest):
     detail_id = request.GET.get('detail_id')
     state = request.GET.get('state')
