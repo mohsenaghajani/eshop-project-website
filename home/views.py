@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
@@ -34,6 +34,10 @@ class HomePage(TemplateView):
             categories_products.append(item)
 
         context['category_products'] = categories_products
+        most_bought_product = Product.objects.filter(orderdetail__order__is_paid=True).annotate(order_count=Sum(
+            'orderdetail__count'
+        )).order_by('-order_count')[:12]
+        context['most_bought_product'] = create_group_list(most_bought_product)
         return context
 
 

@@ -83,7 +83,7 @@ class MyShoppingList(ListView):
 
 
 def shopping_detail(request: HttpRequest, order_id):
-    order = Order.objects.filter(id=order_id, user_id=request.user.id).first()
+    order = Order.objects.prefetch_related('orderdetail_set').filter(id=order_id, user_id=request.user.id).first()
     if order is None:
         return Http404('سبد خرید پیدا نشد')
     return render(request, 'user_panel/shopping_detail.html', {
