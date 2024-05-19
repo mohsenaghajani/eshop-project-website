@@ -6,4 +6,5 @@ urlpatterns = [
     path('profile/edit', ProfileEditView.as_view(), name='profile-edit-page'),
     path('profile/change-pass', ChangePassView.as_view(), name='change-pass'),
     path('profile/my_shopping', MyShoppingList.as_view(), name='my-shopping'),
+    path('profile/my_shopping_detail/<int:order_id>', shopping_detail, name='my-shopping-detail'),
 ]

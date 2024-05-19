@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -79,3 +80,12 @@ class MyShoppingList(ListView):
         query = super().get_queryset()
         query = query.filter(is_paid=True, user_id=self.request.user.id)
         return query
+
+
+def shopping_detail(request: HttpRequest, order_id):
+    order = Order.objects.filter(id=order_id, user_id=request.user.id).first()
+    if order is None:
+        return Http404('سبد خرید پیدا نشد')
+    return render(request, 'user_panel/shopping_detail.html', {
+        'order': order
+    })
