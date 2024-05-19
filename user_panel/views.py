@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from account.models import User
+from order_module.models import Order
 from .forms import ProfileEditForm, ChangePassForm
 
 # Create your views here.
@@ -16,14 +17,9 @@ from .forms import ProfileEditForm, ChangePassForm
 class UserProfileView(TemplateView):
     template_name = 'user_panel/profile.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        pass
-
 
 @method_decorator(login_required, 'dispatch')
 class ProfileEditView(View):
-    def dispatch(self, request, *args, **kwargs):
-        pass
 
     def get(self, request):
         user = User.objects.get(id=request.user.id)
@@ -50,6 +46,7 @@ def user_profile_component(request):
     return render(request, 'profile_component/user_profile_component.html')
 
 
+@method_decorator(login_required, 'dispatch')
 class ChangePassView(View):
     def get(self, request):
         context = {
@@ -72,3 +69,13 @@ class ChangePassView(View):
             'form': form
         }
         return render(request, 'user_panel/change_pass.html', context)
+
+
+class MyShoppingList(ListView):
+    template_name = 'user_panel/my_shopping.html'
+    model = Order
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        query = query.filter(is_paid=True, user_id=self.request.user.id)
+        return query
