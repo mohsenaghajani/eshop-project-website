@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('article.urls')),
     path('', include('user_panel.urls')),
     path('order/', include('order_module.urls')),
+    path('', include('admin_panel.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
