@@ -1,13 +1,14 @@
 from django.http import HttpRequest
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
-
+from utils.my_decorator import permission_admin_panel_factory
 from article.models import Article
 
 
 # Create your views here.
 
-
+@method_decorator(permission_admin_panel_factory(),name='dispatch')
 class DashboardArticlesListView(ListView):
     model = Article
     paginate_by = 12
